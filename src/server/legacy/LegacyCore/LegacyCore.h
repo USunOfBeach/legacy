@@ -28,21 +28,21 @@ typedef std::multimap<uint32, LegacyComprehendSpell> LegacyComprehendSpells;
 class LegacyCore
 {
 public:
-	static LegacyCore* instance()
-	{
-		static LegacyCore instance;
-		return &instance;
-	}
+    static LegacyCore* instance()
+    {
+        static LegacyCore instance;
+        return &instance;
+    }
 
-	// Stat System
-	float CalcXDiminish(float value, float interval) const;
-	float CalcAgility2WeaponCrit(float agility) const;
-	float CalcAgility2Dodge(float agility) const;
-	float CalcSpirit2SpellCrit(float spirit) const;
-	float CalcRatingMultiplier(CombatRating cr) const;
-	
-	// Content Enablility
-	bool IsEnabled(LegacyEnableType type, uint32 entry) const;
+    // Stat System
+    float CalcXDiminish(float value, float interval) const;
+    float CalcAgility2WeaponCrit(float agility) const;
+    float CalcAgility2Dodge(float agility) const;
+    float CalcSpirit2SpellCrit(float spirit) const;
+    float CalcRatingMultiplier(CombatRating cr) const;
+    
+    // Content Enablility
+    bool IsEnabled(LegacyEnableType type, uint32 entry) const;
 
     // Player Data System
     uint32 GetPlayerData(Player* p, uint32 set) const;
@@ -63,13 +63,13 @@ public:
     // Talent
     bool IsTalentUnlocked(Player* p, const TalentEntry* talent);
 
-	// Load
-	void Load();
+    // Load
+    void Load();
 private:
-	LegacyCore();
-	~LegacyCore();
+    LegacyCore();
+    ~LegacyCore();
 
-	LegacyEnableContainer _enableContainer;
+    LegacyEnableContainer _enableContainer;
     LegacyPlayerData _playerData;
     LegacyComprehendSpells _comprehendSpells;
 };

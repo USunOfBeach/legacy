@@ -11,34 +11,34 @@ LegacyCore::~LegacyCore() { }
 
 float LegacyCore::CalcXDiminish(float value, float interval) const
 {
-	if (value <= interval)
-		return value;
-	else if (value <= interval * 2.0f)
-		return (interval + value) * 0.5f;
-	else if (value <= interval * 3.0f)
-		return interval + value * 0.25f;
-	else
-		return interval * 1.375f + value * 0.125f;
+    if (value <= interval)
+        return value;
+    else if (value <= interval * 2.0f)
+        return (interval + value) * 0.5f;
+    else if (value <= interval * 3.0f)
+        return interval + value * 0.25f;
+    else
+        return interval * 1.375f + value * 0.125f;
 }
 
 float LegacyCore::CalcAgility2WeaponCrit(float agility) const
 {
-	return agility / (100.0f + agility) * 40.0f;
+    return agility / (100.0f + agility) * 40.0f;
 }
 
 float LegacyCore::CalcAgility2Dodge(float agility) const
 {
-	return agility / (100.0f + agility) * 30.0f;
+    return agility / (100.0f + agility) * 30.0f;
 }
 
 float LegacyCore::CalcSpirit2SpellCrit(float spirit) const
 {
-	return spirit / (100.0f + spirit) * 40.0f;
+    return spirit / (100.0f + spirit) * 40.0f;
 }
 
 float LegacyCore::CalcRatingMultiplier(CombatRating cr) const
 {
-	return 1.0f;
+    return 1.0f;
 }
 
 bool LegacyCore::IsEnabled(LegacyEnableType type, uint32 entry) const
@@ -55,20 +55,20 @@ bool LegacyCore::IsEnabled(LegacyEnableType type, uint32 entry) const
 
 void LegacyCore::Load()
 {
-	_enableContainer.clear();
-	QueryResult result = WorldDatabase.Query("SELECT type, id, enabled FROM legacy_enables");
-	if (result)
-	{
-		do 
-		{
-			Field* fields = result->Fetch();
-			LegacyEnableType type = (LegacyEnableType)fields[0].GetUInt8();
-			LegacyEnableInfo info;
-			info.entry = fields[1].GetUInt32();
-			info.enabled = fields[2].GetUInt8() == 0 ? false : true;
-			_enableContainer[type] = info;
-		} while (result->NextRow());
-	}
+    _enableContainer.clear();
+    QueryResult result = WorldDatabase.Query("SELECT type, id, enabled FROM legacy_enables");
+    if (result)
+    {
+        do 
+        {
+            Field* fields = result->Fetch();
+            LegacyEnableType type = (LegacyEnableType)fields[0].GetUInt8();
+            LegacyEnableInfo info;
+            info.entry = fields[1].GetUInt32();
+            info.enabled = fields[2].GetUInt8() == 0 ? false : true;
+            _enableContainer[type] = info;
+        } while (result->NextRow());
+    }
 
     _playerData.clear();
     result = CharacterDatabase.Query("SELECT `guid`, `set`, `data` FROM legacy_character_data");
